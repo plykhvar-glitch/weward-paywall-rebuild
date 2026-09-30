@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<title>Paywall Rebuild — WeWard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: only light;
+  /* ---- WeWard, extracted from their live paywall ---- */
+  --ww-bg:#FFFFFF; --ww-ink:#1A1A1A; --ww-ink2:#2B2F33; --ww-muted:#8A9097;
+  --ww-purple:#755DFF; --ww-purple-ink:#6A52E8; --ww-purple-line:#8572DC; --ww-purple-badge:#7E70D7;
+  --ww-lav:#F2EAFF; --ww-orange:#FF732C; --ww-hero:#6249D8;
+  /* ---- the shell, in WeWard's palette ---- */
+  --bg:#FAFAFB; --surf:#FFFFFF; --hair:rgba(26,26,26,.09); --hair2:rgba(26,26,26,.16);
+  --ink:#1A1A1A; --ink2:#4A4F55; --ink3:#8A9097;
+  --accent:#FF732C; --accent-lift:#C9551A; --accent-ink:#B4480F;
+  --panel-ink:#15181B; --panel-muted:#5F666D; --panel-line:#E9ECEF;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--ink);font-family:'Plus Jakarta Sans',-apple-system,sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+input{font:inherit}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:70;background:rgba(250,250,251,.86);backdrop-filter:blur(18px) saturate(160%);border-bottom:1px solid var(--hair)}
+.nav-in{padding:0 28px;height:58px;display:flex;align-items:center;gap:10px}
+.nav-in img{width:26px;height:26px;border-radius:7px}
+.nav-in b{font-size:13.5px;font-weight:600}
+.nav-in span{font-size:13.5px;color:var(--ink2)}
+
+/* stage */
+.stage{display:grid;grid-template-columns:minmax(460px,1fr) minmax(420px,560px);align-items:start;min-height:calc(100vh - 58px)}
+@media(max-width:1060px){.stage{grid-template-columns:1fr}.panelcol{position:static!important;max-height:none!important;border-left:0!important;border-top:1px solid var(--hair)}}
+.phonecol{padding:28px 24px 44px;display:flex;flex-direction:column;align-items:center;gap:16px}
+.panelcol{border-left:1px solid var(--hair);background:#fff;position:sticky;top:58px;max-height:calc(100vh - 58px);overflow-y:auto}
+
+.tools{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.seg{display:inline-flex;background:#fff;border:1px solid #E1E4E6;border-radius:20px;padding:3px;gap:2px}
+.seg button{padding:6px 12px;border-radius:16px;font:600 12px/1 'Plus Jakarta Sans',sans-serif;color:var(--ink2)}
+.seg button.on{background:var(--ink);color:#fff}
+
+.phone{position:relative;width:412px;height:866px;flex:none;background:#000;border:11px solid #000;border-radius:46px;box-shadow:0 0 0 1.5px #D5D9DC,0 34px 70px -22px rgba(26,26,26,.35)}
+.phone-in{position:absolute;inset:0;border-radius:36px;overflow:hidden;background:var(--ww-bg)}
+.island{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:120px;height:34px;background:#000;border-radius:18px;z-index:60}
+.sbar{position:absolute;top:0;left:0;right:0;height:47px;z-index:55;display:flex;align-items:center;justify-content:space-between;padding:4px 30px 0 44px;font:600 16px/1 -apple-system,'SF Pro Text',sans-serif;color:#fff;pointer-events:none}
+.sbar .g{display:flex;gap:6px;align-items:center}
+.homebar{position:absolute;bottom:7px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#111;z-index:56}
+
+/* ---- the paywall: WeWard's system, prefixed scr- ---- */
+.scr{position:absolute;inset:0;display:flex;flex-direction:column;background:var(--ww-bg);color:var(--ww-ink);font-family:Figtree,-apple-system,sans-serif}
+.scr-body{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:none}
+.scr-body::-webkit-scrollbar{display:none}
+.scr-foot{flex:none;padding:8px 16px 24px;display:flex;flex-direction:column;align-items:center;gap:10px;background:var(--ww-bg)}
+.scr-hero{position:relative;padding-top:37px;background:var(--ww-hero)}
+.scr-hero img{display:block;width:100%;margin-bottom:-2px}
+.scr-x{position:absolute;right:12px;top:69px;width:30px;height:30px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.scr-goal{position:absolute;left:50%;bottom:40px;transform:translateX(-50%);white-space:nowrap;background:#fff;color:#5B45D6;font:700 13.5px/1 Figtree,sans-serif;padding:8px 13px 8px 9px;border-radius:999px;display:flex;align-items:center;gap:7px;box-shadow:0 6px 18px rgba(40,20,120,.28)}
+.scr-goal i{width:18px;height:18px;border-radius:50%;background:var(--ww-orange);display:grid;place-items:center}
+.scr-h{font-size:24px;font-weight:700;text-align:center;line-height:1.24;margin:2px 20px 0;letter-spacing:-.005em}
+.scr-h em{font-style:normal;color:var(--ww-purple-ink)}
+.scr-sub{text-align:center;font-size:15px;line-height:1.4;color:var(--ww-ink2);margin:7px 22px 0}
+.scr-proof{display:flex;justify-content:center;gap:6px;align-items:center;margin:9px 12px 0;font-size:13.5px;color:var(--ww-ink2);white-space:nowrap}
+.scr-proof .st{color:#FFB800;letter-spacing:.5px}
+.scr-proof b{color:var(--ww-ink)}
+.scr-proof .sep{width:3px;height:3px;border-radius:50%;background:#B8BDC3}
+.scr-plans{margin:14px 16px 0;display:flex;flex-direction:column;gap:12px}
+.scr-plan{position:relative;border:2px solid transparent;border-radius:12px;background:#fff;box-shadow:0 2px 12px rgba(30,20,80,.08);display:flex;align-items:center;justify-content:space-between;padding:0 18px;min-height:66px;text-align:left;width:100%;font-family:Figtree,sans-serif;color:var(--ww-ink)}
+.scr-plan .nm{font-size:19px;font-weight:700}
+.scr-plan .pr{font-size:16.5px}
+.scr-plan .old{font-size:16px;margin-top:3px}
+.scr-plan .old s{color:var(--ww-muted);margin-right:6px}
+.scr-plan.on{background:var(--ww-lav);border-color:var(--ww-purple-line)}
+.scr-plan.yr{min-height:90px;padding-top:14px}
+.scr-badge{position:absolute;left:-2px;top:-2px;background:var(--ww-purple-badge);color:#fff;font-size:13.5px;font-weight:600;padding:4px 10px;border-radius:11px 0 11px 0}
+.scr-save{position:absolute;right:12px;top:-11px;background:var(--ww-orange);color:#fff;font-size:12px;font-weight:800;letter-spacing:.03em;padding:4px 9px;border-radius:999px}
+.scr-help{font-size:14px;color:var(--ww-ink2);text-align:center;line-height:1.35}
+.scr-help b{font-weight:700}
+.scr-cta{width:100%;height:52px;border-radius:999px;background:var(--ww-purple);color:#fff;font:600 19px/1 Figtree,sans-serif}
+.scr-toast{position:absolute;left:16px;right:16px;bottom:130px;background:rgba(20,22,26,.92);color:#fff;font:500 14px/1.4 'Plus Jakarta Sans',sans-serif;padding:11px 14px;border-radius:12px;z-index:80;opacity:0;transition:opacity .25s;pointer-events:none;text-align:center}
+.scr-toast.show{opacity:1}
+
+/* today = their shipping version */
+.today .pz{display:none!important}
+.today .scr-h{font-size:27px;margin-top:22px}
+.today .scr-plans{margin-top:34px}
+
+/* markers */
+.mk{position:absolute;z-index:40;width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;font:800 12px/22px 'Plus Jakarta Sans',sans-serif;text-align:center;box-shadow:0 0 0 3px #fff,0 3px 10px rgba(0,0,0,.25);pointer-events:none;transition:transform .2s}
+.nomk .mk,.today .mk{display:none}
+.hl{outline:2.5px solid var(--accent);outline-offset:3px;border-radius:10px}
+.mk.hot{transform:scale(1.25)}
+
+/* onboarding answers card */
+.ans{width:412px;max-width:100%;background:#fff;border:1px solid var(--hair);border-radius:18px;padding:18px 18px 16px;box-shadow:0 2px 10px rgba(26,26,26,.04)}
+.ans .k{font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3)}
+.ans p{font-size:12.5px;color:var(--ink3);margin:3px 0 12px;line-height:1.45}
+.ans label{display:block;font-size:12px;font-weight:700;color:var(--ink2);margin:10px 0 6px}
+.ans input{width:100%;height:38px;border:1px solid #E1E4E6;border-radius:10px;padding:0 12px;font-size:14px;outline:0}
+.ans input:focus{border-color:var(--accent)}
+.mot{display:flex;flex-wrap:wrap;gap:6px}
+.mot button{padding:7px 11px;border-radius:18px;border:1px solid #E1E4E6;background:#fff;font:600 12px/1 'Plus Jakarta Sans',sans-serif;color:var(--ink2)}
+.mot button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.ans .goalrow{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:12.5px;color:var(--ink2)}
+.ans .goalrow b{font-size:13px;color:var(--ink)}
+
+/* panel */
+.pn{padding:32px 34px 60px;color:var(--panel-ink)}
+.pn-eb{font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-ink)}
+.pn h1{font-size:28px;line-height:1.15;font-weight:700;letter-spacing:-.03em;margin:10px 0 12px}
+.pn .lede{font-size:15px;line-height:1.62;color:#3A4046}
+.pn-from{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 4px}
+.pn-from span{font-size:12px;font-weight:600;border-radius:999px;padding:5px 10px;background:#FFF3EA;color:var(--accent-ink)}
+.pn-from span b{font-weight:800}
+.chg{border-top:1px solid var(--panel-line);padding:22px 0 20px;display:grid;grid-template-columns:30px 1fr;gap:14px;cursor:default;transition:background .15s}
+.chg:first-of-type{margin-top:22px}
+.chg .no{width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;font:800 12.5px/26px 'Plus Jakarta Sans',sans-serif;text-align:center;margin-top:1px}
+.chg h3{font-size:17px;line-height:1.3;font-weight:700;letter-spacing:-.015em}
+.chg .ba{margin-top:10px;display:grid;grid-template-columns:54px 1fr;gap:6px 10px;font-size:13.5px;line-height:1.5}
+.chg .ba dt{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--panel-muted);padding-top:3px}
+.chg .ba dd{color:#2E353B}
+.chg .ba dd q{quotes:'“' '”'}
+.chg .uses{margin-top:10px;font-size:12px;color:var(--panel-muted)}
+.chg .uses b{color:#2E353B}
+.chg .imp{margin-top:12px;display:flex;align-items:baseline;gap:10px}
+.chg .imp b{font-size:24px;font-weight:700;letter-spacing:-.03em;color:var(--accent-ink);white-space:nowrap}
+.chg .imp span{font-size:11.5px;color:var(--panel-muted)}
+.chg:hover{background:#FFFAF6}
+.kept{border-top:1px solid var(--panel-line);padding-top:20px;margin-top:4px}
+.kept .k{font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--panel-muted)}
+.kept p{font-size:13.5px;line-height:1.6;color:#3A4046;margin-top:6px}
+.pn-foot{font-size:11.5px;line-height:1.55;color:var(--panel-muted);border-top:1px solid var(--panel-line);padding-top:14px;margin-top:22px}
+
+@media(max-width:500px){
+  .phonecol{padding:16px 0 28px}
+  .phone{width:100vw;height:calc(100svh - 58px);min-height:680px;border:0;border-radius:0;box-shadow:none}
+  .phone-in{border-radius:0}
+  .island,.sbar,.homebar{display:none}
+  .scr-hero{padding-top:8px}.scr-x{top:39px}
+  .ans{width:auto;margin:0 12px}
+}
+</style>
+</head>
+<body>
+<div class="nav"><div class="nav-in"><img src="img/icon.png" alt="WeWard"><b>Paywall rebuild</b><span>· WeWard</span></div></div>
+
+<div class="stage">
+  <div class="phonecol">
+    <div class="tools">
+      <div class="seg" id="segVar"><button data-v="today">Today</button><button data-v="new" class="on">Personalized</button></div>
+      <div class="seg" id="segMk"><button data-m="on" class="on">Numbers on</button><button data-m="off">Off</button></div>
+    </div>
+
+    <div class="phone">
+      <div class="phone-in" id="phoneIn">
+        <div class="island"></div>
+        <div class="sbar"><span>9:41</span><span class="g">
+          <svg width="18" height="12" viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1" opacity=".35"/></svg>
+          <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><path d="M8 2.2c2.3 0 4.4.9 6 2.4l1.3-1.3A10.3 10.3 0 0 0 8 .3 10.3 10.3 0 0 0 .7 3.3L2 4.6a8.4 8.4 0 0 1 6-2.4Zm0 3.7c1.3 0 2.5.5 3.4 1.3l1.3-1.3A6.6 6.6 0 0 0 8 4a6.6 6.6 0 0 0-4.7 1.9l1.3 1.3C5.5 6.4 6.7 5.9 8 5.9Zm0 3.6c.5 0 1 .2 1.3.5L8 11.3 6.7 10c.3-.3.8-.5 1.3-.5Z"/></svg>
+          <svg width="27" height="13" viewBox="0 0 27 13" fill="none"><rect x=".5" y=".5" width="23" height="12" rx="3.5" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="18" height="9" rx="2" fill="currentColor"/><path d="M25 4.5v4c.8-.3 1.3-1.1 1.3-2s-.5-1.7-1.3-2Z" fill="currentColor" opacity=".45"/></svg></span></div>
+        <div class="homebar"></div>
+
+        <section class="scr" id="pw">
+          <div class="scr-body" id="pwBody">
+            <div class="scr-hero">
+              <img src="img/hero_plans.png" alt="">
+              <button class="scr-x" id="pwX" aria-label="Close"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M2 2l10 10M12 2 2 12" stroke="#7861FA" stroke-width="2.2" stroke-linecap="round"/></svg></button>
+              <div class="scr-goal pz" id="pwGoal" data-t="1"><i><svg width="10" height="10" viewBox="0 0 12 12"><path d="M2.5 6.3 5 8.6 9.6 3.6" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span id="pwGoalTxt"></span></div>
+            </div>
+            <h1 class="scr-h" id="pwH" data-t="1"></h1>
+            <p class="scr-sub pz" id="pwSub" data-t="2"></p>
+            <div class="scr-proof pz" id="pwProof" data-t="3"><span class="st">★</span><span><b>4.8</b> · 223K App Store ratings</span><span class="sep"></span><span><b>30M</b> walkers</span></div>
+            <div class="scr-plans">
+              <button class="scr-plan" data-plan="m"><span class="nm">1 Month</span><span class="pr">4,49 €/mo</span></button>
+              <button class="scr-plan yr on" data-plan="y"><span class="scr-badge">Most popular</span><span class="scr-save pz" id="pwSave" data-t="4">SAVE 39%</span><span><span class="nm">12 Months</span><div class="old"><s>53,88 €</s>32,99 €</div></span><span class="pr">2,74 €/mo</span></button>
+            </div>
+          </div>
+          <div class="scr-foot">
+            <div class="scr-help">Renews automatically. Cancel anytime.</div>
+            <button class="scr-cta" id="pwCta"></button>
+            <div class="scr-help" id="pwBill" data-t="5"></div>
+          </div>
+          <div class="scr-toast" id="toast"></div>
+        </section>
+        <div id="mks"></div>
+      </div>
+    </div>
+
+    <div class="ans">
+      <div class="k">Onboarding answers</div>
+      <p>What the onboarding already asks. Change them and the paywall above rewrites itself.</p>
+      <label for="aName">“What’s your name?”</label>
+      <input id="aName" value="Camille" autocomplete="off">
+      <label>“What brings you to WeWard?” <span style="font-weight:500;color:var(--ink3)">— the first pick leads</span></label>
+      <div class="mot" id="aMot"></div>
+      <div class="goalrow"><span>Daily goal the app sets</span><b>4,500 steps</b></div>
+    </div>
+  </div>
+
+  <aside class="panelcol"><div class="pn">
+    <div class="pn-eb">Paywall rebuild · September 2026</div>
+    <h1>Your paywall, personalized from your own onboarding</h1>
+    <p class="lede">Same screen, same prices, same art direction. Five changes, each one fed by something your onboarding already asks, or something you already publish. Flip <b>Today</b> above the phone to compare with the version that ships now.</p>
+    <div class="pn-from" id="pnFrom"></div>
+
+    <div class="chg" data-c="1"><span class="no">1</span><div>
+      <h3>Their name and their goal lead the screen</h3>
+      <dl class="ba"><dt>Today</dt><dd><q>Earn Even More Rewards &amp; Unlock Exclusive Perks</q>, the same for every walker.</dd>
+        <dt>Now</dt><dd id="c1now"></dd></dl>
+      <div class="uses"><b>Uses:</b> name, first motivation, the 4,500-step goal.</div>
+      <div class="imp"><b>CR +15–20%</b><span>to purchase</span></div></div></div>
+
+    <div class="chg" data-c="2"><span class="no">2</span><div>
+      <h3>The perks they came for, first</h3>
+      <dl class="ba"><dt>Today</dt><dd>No perks on this screen. They sit on the two Premium screens before it, in the same order for everyone.</dd>
+        <dt>Now</dt><dd id="c2now"></dd></dl>
+      <div class="uses"><b>Uses:</b> first motivation. Every perk is from your own Premium screens.</div>
+      <div class="imp"><b>CR +3–8%</b><span>copy change</span></div></div></div>
+
+    <div class="chg" data-c="3"><span class="no">3</span><div>
+      <h3>Your proof, next to the price</h3>
+      <dl class="ba"><dt>Today</dt><dd>No rating and no user count anywhere on the Premium screens.</dd>
+        <dt>Now</dt><dd>Your 4.8 from 223K App Store ratings and your 30 million walkers, right above the plans.</dd></dl>
+      <div class="imp"><b>CR +10–15%</b><span>to purchase</span></div></div></div>
+
+    <div class="chg" data-c="4"><span class="no">4</span><div>
+      <h3>The yearly saving, said out loud</h3>
+      <dl class="ba"><dt>Today</dt><dd>53,88 € is crossed out, but the card never says how much that saves.</dd>
+        <dt>Now</dt><dd>A <b>Save 39%</b> tag on the yearly card. It is your own maths: 32,99 € against twelve months at 4,49 €.</dd></dl>
+      <div class="imp"><b>CR +5–15%</b><span>· ARPU +10–15% from a bigger yearly share</span></div></div></div>
+
+    <div class="chg" data-c="5"><span class="no">5</span><div>
+      <h3>The free week, spelled out</h3>
+      <dl class="ba"><dt>Today</dt><dd>The trial lives only in the button label. The line under it says <q>Billed at 32,99 €/year</q>, which reads as a charge.</dd>
+        <dt>Now</dt><dd><q>No charge today. Free for 7 days, then 32,99 €/year.</q> Tap 1 Month and the button and the line switch to the monthly terms.</dd></dl>
+      <div class="imp"><b>CR +3–8%</b><span>trust at the button</span></div></div></div>
+
+    <div class="kept"><div class="k">Kept exactly as it is</div>
+      <p>The hero with the panda and the four orbiting reward icons, the diamond Premium mark, the close button, both plan cards and their prices, the Most popular tab, the 53,88 € strikethrough, “Renews automatically. Cancel anytime.” and the purple Start my FREE week button.</p></div>
+
+    <div class="pn-foot">Impact ranges are Adapty’s expected effect from teardowns and A/B tests across subscription apps — not measured lift for WeWard. The prices, the free week, the 4.8 rating, the 30M figure and every perk come from WeWard’s own App Store listing, website and in-app screens.</div>
+  </div></aside>
+</div>
+
+<script>
+var MOT={
+ walk:   {t:'Walk more',            h:'walk more and earn <em>2x Wards</em> on every step', sub:'2x on every walk, a weekend bonus and no ads.'},
+ rewards:{t:'Earn rewards',         h:'turn your 4,500 steps into <em>2x the rewards</em>', sub:'2x Wards, faster cash-outs and monthly bonuses.'},
+ compete:{t:'Compete with friends', h:'earn <em>2x Wards</em> while you take on your friends', sub:'2x Wards, a weekend bonus and no ads.'},
+ charity:{t:'Support charities',    h:'earn <em>2x Wards</em> to give to the causes you love', sub:'2x Wards to donate, plus monthly bonuses.'},
+ weight: {t:'Lose weight',          h:'earn <em>2x Wards</em> on every step toward your goal', sub:'2x on every walk, a weekend bonus and no ads.'},
+ co2:    {t:'Reduce CO2',           h:'earn <em>2x Wards</em> on every step instead of a ride', sub:'2x on every car-free walk, and no ads.'},
+ fun:    {t:'Play & have fun',      h:'double the rewards on <em>every walk</em>', sub:'2x Wards, monthly exclusive rewards and no ads.'}
+};
+var ORDERM=['walk','rewards','compete','charity','weight','co2','fun'];
+var S={v:'new',mk:true,name:'Camille',mot:['walk'],plan:'y'};
+var $=function(s){return document.querySelector(s);}, $$=function(s){return [].slice.call(document.querySelectorAll(s));};
+function first(){ return S.name.trim().split(' ')[0]; }
+function cap(s){ return s.charAt(0).toUpperCase()+s.slice(1); }
+
+$('#aMot').innerHTML=ORDERM.map(function(k){ return '<button data-k="'+k+'">'+MOT[k].t+'</button>'; }).join('');
+
+function headline(){
+  if(S.v==='today') return 'Earn Even More Rewards &amp; Unlock Exclusive Perks';
+  var m=MOT[S.mot[0]||'walk'], nm=first();
+  return nm ? nm+', '+m.h : cap(m.h.replace(/^<em>/,'<em>'));
+}
+function render(){
+  var pz=S.v==='new', m=MOT[S.mot[0]||'walk'];
+  $('#phoneIn').classList.toggle('today',!pz);
+  $('#phoneIn').classList.toggle('nomk',!S.mk);
+  $('#pwH').innerHTML=headline();
+  $('#pwGoalTxt').textContent=(S.mot.length?m.t:'Your goal')+' · 4,500 steps a day';
+  $('#pwSub').textContent=m.sub;
+  $$('.scr-plan').forEach(function(b){ b.classList.toggle('on',b.dataset.plan===S.plan); });
+  if(S.plan==='y'){ $('#pwCta').textContent='Start my FREE week';
+    $('#pwBill').innerHTML=pz?'<b>No charge today.</b> Free for 7 days, then <b>32,99 €</b>/year':'Billed at <b>32,99 €</b>/year'; }
+  else { $('#pwCta').textContent='Continue';
+    $('#pwBill').innerHTML=pz?'Billed today: <b>4,49 €</b>/month. Cancel anytime.':'Billed at <b>4,49 €</b>/month'; }
+  $$('#aMot button').forEach(function(b){ b.classList.toggle('on',S.mot.indexOf(b.dataset.k)>=0); });
+  $('#c1now').innerHTML='<q>'+headline().replace(/<\/?em>/g,'')+'</q>, with a <b>'+(S.mot.length?m.t:'Your goal')+' · 4,500 steps a day</b> pill on the hero.';
+  $('#c2now').innerHTML='One line under the headline that leads with what they picked: <q>'+m.sub+'</q>';
+  var f=[]; if(first()) f.push('Name <b>'+first()+'</b>'); f.push('Motivation <b>'+(S.mot.length?m.t:'none')+'</b>'); f.push('Daily goal <b>4,500 steps</b>');
+  $('#pnFrom').innerHTML=f.map(function(x){ return '<span>'+x+'</span>'; }).join('');
+  requestAnimationFrame(placeMarks);
+}
+/* numbered markers, placed on the element each change touches */
+function placeMarks(){
+  var box=$('#phoneIn').getBoundingClientRect(), z=box.width/$('#phoneIn').offsetWidth||1, h='';
+  [1,2,3,4,5].forEach(function(n){
+    var el=document.querySelector('#pw [data-t="'+n+'"]'); if(!el||!el.offsetParent) return;
+    var rg=document.createRange(); rg.selectNodeContents(el); var tr=rg.getClientRects()[0]||el.getBoundingClientRect();
+    var r=el.getBoundingClientRect(), x=(tr.left-box.left)/z-27, y=(tr.top-box.top)/z+(tr.height-22)/2;
+    if(n===1){ x=(r.left-box.left)/z-12; y=(r.top-box.top)/z-12; }
+    if(n===4){ x=(r.left-box.left)/z-26; y=(r.top-box.top)/z; }
+    h+='<span class="mk" data-mk="'+n+'" style="left:'+Math.max(6,x)+'px;top:'+y+'px">'+n+'</span>';
+  });
+  $('#mks').innerHTML=h;
+}
+$('#pwBody').addEventListener('scroll',placeMarks);
+window.addEventListener('resize',placeMarks);
+
+$$('#segVar button').forEach(function(b){ b.addEventListener('click',function(){ S.v=b.dataset.v; $$('#segVar button').forEach(function(x){ x.classList.toggle('on',x===b); }); render(); }); });
+$$('#segMk button').forEach(function(b){ b.addEventListener('click',function(){ S.mk=b.dataset.m==='on'; $$('#segMk button').forEach(function(x){ x.classList.toggle('on',x===b); }); render(); }); });
+$('#aName').addEventListener('input',function(e){ S.name=e.target.value; render(); });
+$$('#aMot button').forEach(function(b){ b.addEventListener('click',function(){ var k=b.dataset.k;
+  S.mot=S.mot.indexOf(k)>=0?S.mot.filter(function(x){return x!==k;}):S.mot.concat([k]); render(); }); });
+$$('.scr-plan').forEach(function(b){ b.addEventListener('click',function(){ S.plan=b.dataset.plan; render(); }); });
+var tt; function toast(m){ var e=$('#toast'); e.textContent=m; e.classList.add('show'); clearTimeout(tt); tt=setTimeout(function(){ e.classList.remove('show'); },1600); }
+$('#pwCta').addEventListener('click',function(){ toast('App Store purchase sheet opens here'); });
+$('#pwX').addEventListener('click',function(){ toast('Closes the paywall'); });
+
+/* hovering a change lights up what it touches */
+$$('.chg').forEach(function(c){
+  var n=c.dataset.c;
+  c.addEventListener('mouseenter',function(){ if(S.v!=='new') return; $$('#pw [data-t="'+n+'"]').forEach(function(e){ e.classList.add('hl'); }); var m=document.querySelector('[data-mk="'+n+'"]'); if(m) m.classList.add('hot'); });
+  c.addEventListener('mouseleave',function(){ $$('.hl').forEach(function(e){ e.classList.remove('hl'); }); $$('.mk.hot').forEach(function(e){ e.classList.remove('hot'); }); });
+});
+if(/[?&]v=today/.test(location.search)){ S.v='today'; $$('#segVar button').forEach(function(x){ x.classList.toggle('on',x.dataset.v==='today'); }); }
+render();
+window.addEventListener('load',placeMarks);
+</script>
+</body>
+</html>
