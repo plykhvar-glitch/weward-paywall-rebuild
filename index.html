@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
-<title>Paywall Rebuild — WeWard</title>
+<title>Paywall Audit — WeWard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -144,11 +144,249 @@ input{font:inherit}
   .scr-hero{padding-top:8px}.scr-x{top:39px}
   .ans{width:auto;margin:0 12px}
 }
+
+/* ============ views ============ */
+.view{display:none}.view.on{display:block}
+.nav-links{margin-left:auto;display:flex;gap:2px}
+.nav-links button{padding:7px 14px;border-radius:8px;font-size:13px;font-weight:600;color:var(--ink3)}
+.nav-links button.on{color:var(--ink);background:#fff;box-shadow:0 1px 4px rgba(26,26,26,.08)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 32px}
+@media(max-width:700px){.wrap{padding:0 20px}.nav-in span{display:none}}
+
+/* ============ overview ============ */
+.hero{padding:100px 0 0;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-340px;left:50%;transform:translateX(-50%);width:1100px;height:640px;border-radius:50%;pointer-events:none;background:radial-gradient(closest-side,rgba(255,115,44,.16),transparent 72%)}
+.hero::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(40% 50% at 8% 20%,rgba(60,232,138,.16),transparent 70%),radial-gradient(38% 45% at 92% 18%,rgba(117,93,255,.18),transparent 70%)}
+.hero>*{position:relative;z-index:1}
+.eyebrow{font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-lift);margin-bottom:26px}
+.hero h1{font-size:76px;line-height:.98;font-weight:700;letter-spacing:-.045em;margin:0 0 24px}
+.hero .lede{font-size:20px;line-height:1.5;color:var(--ink2);max-width:640px;margin:0 auto;letter-spacing:-.012em}
+.hero .meta{margin-top:28px;font-size:12.5px;color:var(--ink3)}
+.hero .meta b{color:var(--ink2)}
+.herobtns{display:flex;justify-content:center;gap:10px;margin-top:28px;flex-wrap:wrap}
+.ghostbtn{display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--hair2);font-size:14px;font-weight:700;padding:9px 20px 9px 9px;border-radius:30px;box-shadow:0 2px 12px rgba(26,26,26,.06)}
+.ghostbtn .pl{width:30px;height:30px;border-radius:50%;background:var(--accent);display:grid;place-items:center;color:#fff}
+.ghostbtn.pu .pl{background:var(--ww-purple)}
+@media(max-width:820px){.hero h1{font-size:50px}.hero{padding-top:64px}.hero .lede{font-size:17px}}
+.stats{display:flex;margin:64px auto 0;max-width:760px;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.stat{flex:1;padding:26px 12px;text-align:center;border-left:1px solid var(--hair)}
+.stat:first-child{border-left:0}
+.stat b{display:block;font-size:26px;font-weight:700;letter-spacing:-.03em}
+.stat span{display:block;font-size:11.5px;color:var(--ink3);margin-top:5px;line-height:1.35}
+@media(max-width:700px){.stat b{font-size:19px}.stat{padding:18px 6px}}
+.fb{max-width:760px;margin:0 auto;padding:30px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:26px;text-align:left}
+@media(max-width:700px){.fb{grid-template-columns:1fr;gap:18px}}
+.fb-k{grid-column:1/-1;font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3);text-align:center;margin-bottom:-6px}
+.fb-i{display:flex;gap:12px}
+.fb-i .tick{width:18px;height:18px;flex:none;margin-top:3px;border-radius:50%;background:rgba(255,115,44,.16);display:grid;place-items:center}
+.fb-i .tick svg{width:10px;height:10px;stroke:var(--accent-lift);stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.fb-i p{font-size:14px;line-height:1.55;color:var(--ink2)}
+.fb-i p b{color:var(--ink)}
+.sec{padding:92px 0}
+.sec-k{font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3);margin-bottom:18px}
+.sec h2{font-size:38px;line-height:1.14;font-weight:700;letter-spacing:-.035em;margin:0 0 20px;max-width:720px}
+.sec p.body{font-size:17px;line-height:1.66;color:var(--ink2);max-width:660px;margin:0 0 18px}
+.sec p.body b{color:var(--ink);font-weight:600}
+@media(max-width:820px){.sec h2{font-size:29px}.sec{padding:60px 0}}
+.rule{height:1px;background:var(--hair)}
+.notes{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px;max-width:840px}
+@media(max-width:760px){.notes{grid-template-columns:1fr}}
+.note{background:#fff;border:1px solid var(--hair);border-radius:16px;padding:24px 26px;box-shadow:0 2px 10px rgba(26,26,26,.04)}
+.note h4{font-size:15px;font-weight:700;margin-bottom:8px}
+.note p{font-size:14px;line-height:1.6;color:var(--ink2)}
+
+/* the Sweatcoin case — the loudest block on the page */
+.case{background:#15171A;color:#fff;border-radius:32px;padding:56px 56px 50px;position:relative;overflow:hidden}
+.case::before{content:'';position:absolute;right:-180px;top:-200px;width:620px;height:620px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,115,44,.28),transparent 70%)}
+.case::after{content:'';position:absolute;left:-160px;bottom:-240px;width:560px;height:560px;border-radius:50%;background:radial-gradient(closest-side,rgba(117,93,255,.24),transparent 70%)}
+.case>*{position:relative;z-index:1}
+@media(max-width:760px){.case{padding:34px 24px 30px;border-radius:24px}}
+.case .k{font-size:11.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#FF9A66}
+.case h2{font-size:42px;line-height:1.1;font-weight:700;letter-spacing:-.035em;margin:16px 0 16px;max-width:760px;color:#fff}
+@media(max-width:820px){.case h2{font-size:30px}}
+.case .lead{font-size:17px;line-height:1.62;color:#C9CED3;max-width:700px}
+.case .lead b{color:#fff}
+.big{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:40px 0 0;border-top:1px solid rgba(255,255,255,.12);border-bottom:1px solid rgba(255,255,255,.12)}
+@media(max-width:820px){.big{grid-template-columns:1fr 1fr}}
+.big div{padding:26px 18px 24px 0;border-right:1px solid rgba(255,255,255,.1)}
+.big div:last-child{border-right:0}
+.big b{display:block;font-size:52px;line-height:1;font-weight:800;letter-spacing:-.045em;color:#FF8A4C}
+.big span{display:block;font-size:13px;line-height:1.45;color:#C9CED3;margin-top:10px;max-width:190px}
+@media(max-width:820px){.big b{font-size:38px}.big div{padding:20px 12px 18px 0}}
+.finds{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:34px}
+@media(max-width:820px){.finds{grid-template-columns:1fr}}
+.find{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:24px 24px 22px}
+.find .n{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.find .n b{font-size:30px;font-weight:800;letter-spacing:-.035em;color:#FF8A4C;white-space:nowrap}
+.find .n span{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#9AA3AD}
+.find h4{font-size:17px;font-weight:700;letter-spacing:-.015em;margin:10px 0 7px;color:#fff}
+.find p{font-size:14px;line-height:1.6;color:#C9CED3}
+.find .ww{margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.1);font-size:13px;line-height:1.5;color:#E8EAED}
+.find .ww b{color:#FFB38A;font-weight:700}
+.quote{margin-top:34px;display:grid;grid-template-columns:4px 1fr;gap:20px}
+.quote i{background:#FF8A4C;border-radius:4px}
+.quote p{font-size:22px;line-height:1.45;font-weight:600;letter-spacing:-.02em;color:#fff;max-width:760px}
+.quote small{display:block;margin-top:10px;font-size:13px;color:#9AA3AD;font-weight:500}
+@media(max-width:820px){.quote p{font-size:18px}}
+.how{display:flex;flex-wrap:wrap;gap:8px;margin-top:30px}
+.how span{font-size:12.5px;font-weight:600;color:#E8EAED;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:7px 13px}
+.case .src{margin-top:24px;font-size:12px;color:#8A9097}
+
+.ideas{margin-top:14px;border-top:1px solid var(--hair)}
+.idea{display:grid;grid-template-columns:52px 1fr 190px;gap:26px;align-items:start;padding:28px 4px;border-bottom:1px solid var(--hair);text-align:left;width:100%}
+.idea:hover{background:rgba(255,255,255,.8)}
+@media(max-width:780px){.idea{grid-template-columns:38px 1fr;gap:16px}}
+.idea .no{width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font:800 13px/28px 'Plus Jakarta Sans',sans-serif;text-align:center}
+.idea h3{font-size:21px;line-height:1.25;font-weight:700;letter-spacing:-.024em;margin-bottom:7px}
+.idea p{font-size:14.5px;line-height:1.6;color:var(--ink2);max-width:560px}
+.idea .tie{display:inline-flex;margin-top:10px;font-size:12px;font-weight:600;color:#fff;background:#15171A;border-radius:999px;padding:5px 11px}
+.idea .seeit{display:block;margin-top:10px;font-size:12.5px;font-weight:600;color:var(--accent-lift)}
+.idea .out{text-align:right;padding-top:3px}
+@media(max-width:780px){.idea .out{grid-column:2;text-align:left;padding-top:4px}}
+.idea .out b{display:block;font-size:19px;font-weight:700;color:var(--accent-lift);white-space:nowrap}
+.idea .out span{display:block;font-size:10.5px;color:var(--ink3);margin-top:3px;letter-spacing:.04em;text-transform:uppercase;font-weight:600}
+.band{background:#fff;border:1px solid var(--hair);border-radius:28px;padding:38px 44px;margin-top:44px;display:flex;align-items:center;gap:36px;flex-wrap:wrap;box-shadow:0 2px 10px rgba(26,26,26,.04)}
+@media(max-width:700px){.band{padding:28px 24px}}
+.band .lab{font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:10px}
+.band .txt{flex:1;min-width:240px}
+.band .txt p{font-size:15.5px;line-height:1.6;color:var(--ink2)}
+.band .nums{display:flex;gap:34px}
+.band .nums b{display:block;font-size:30px;font-weight:700;letter-spacing:-.035em;color:var(--accent-lift)}
+.band .nums span{display:block;font-size:11px;color:var(--ink3);letter-spacing:.04em;text-transform:uppercase;font-weight:600}
+.next{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:30px}
+@media(max-width:760px){.next{grid-template-columns:1fr}}
+.cta-row{display:flex;justify-content:center;margin-top:52px}
+.bigbtn{display:inline-flex;align-items:center;gap:9px;background:var(--accent);color:#fff;font-size:15px;font-weight:700;padding:15px 26px;border-radius:30px}
+.foot{border-top:1px solid var(--hair);padding:36px 0 70px;font-size:12.5px;line-height:1.6;color:var(--ink3)}
+.flash{animation:flash 1.8s ease 2}
+@keyframes flash{0%,100%{outline:2.5px solid transparent;outline-offset:3px}50%{outline:2.5px solid var(--accent);outline-offset:3px}}
 </style>
 </head>
 <body>
-<div class="nav"><div class="nav-in"><img src="img/icon.png" alt="WeWard"><b>Paywall rebuild</b><span>· WeWard</span></div></div>
+<div class="nav"><div class="nav-in"><img src="img/icon.png" alt="WeWard"><b>Paywall audit</b><span>· WeWard</span><div class="nav-links"><button class="on" data-view="over">Overview</button><button data-view="pw">Paywall</button></div></div></div>
 
+
+<!-- ======================= OVERVIEW ======================= -->
+<div class="view on" id="view-over">
+<div class="hero"><div class="wrap">
+  <div class="eyebrow">Paywall audit · September 2026</div>
+  <h1>WeWard</h1>
+  <p class="lede">Five changes to your Premium paywall, personalized with the answers your onboarding already collects.</p>
+  <div class="meta">Prepared by <b>Adapty</b> · based on your live iOS flow and your App Store listing</div>
+  <div class="herobtns">
+    <button class="ghostbtn pu" data-view="pw"><span class="pl"><svg width="12" height="12" viewBox="0 0 24 24" fill="#fff"><path d="M7 4.5v15l12-7.5z"/></svg></span>Open the paywall</button>
+    <button class="ghostbtn" data-scroll="case"><span class="pl"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span>How Sweatcoin tripled conversion</button>
+  </div>
+  <div class="stats">
+    <div class="stat"><b>30,000+</b><span>apps run subscriptions<br>on Adapty</span></div>
+    <div class="stat"><b>5</b><span>changes, all on<br>one screen</span></div>
+    <div class="stat"><b>0</b><span>design changes<br>to your art direction</span></div>
+  </div>
+  <div class="fb">
+    <div class="fb-k">Built in Adapty Flow Builder</div>
+    <div class="fb-i"><span class="tick"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span><p><b>Millions of dollars</b> in subscription revenue pass through Flow Builder every month.</p></div>
+    <div class="fb-i"><span class="tick"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span><p><b>Nearly 500 apps</b> actively build their paywalls and onboarding in it — plenty of them past $100K MRR.</p></div>
+  </div>
+</div></div>
+
+<div class="sec"><div class="wrap">
+  <div class="sec-k">What this is</div>
+  <h2>We opened WeWard the way a new walker does, then rebuilt the one screen where the money is decided.</h2>
+  <p class="body">Adapty powers subscriptions for <b>30,000+ apps</b>, so we see what moves conversion and ARPU across the market, not inside one app. We installed WeWard, went through the onboarding to Premium, read your App Store listing and your website, and rebuilt your plans screen.</p>
+  <p class="body">Your onboarding already asks for a name, what brings someone to WeWard, and sets a 4,500-step goal. <b>The paywall uses none of it today.</b> The rebuilt one does, and it keeps your design exactly as it is.</p>
+  <div class="notes">
+    <div class="note"><h4>We did not redesign your paywall</h4><p>Your hero with Wardy and the orbiting reward icons, the diamond Premium mark, both plan cards, your prices and your purple button all stay. Only the words and what sits next to the price change.</p></div>
+    <div class="note"><h4>You may have tested some of this</h4><p>We are working from the outside, so we cannot see your experiment history. If you have already run one of these, tell us and we will go deeper on the rest.</p></div>
+  </div>
+</div></div>
+
+<div class="wrap" id="case">
+  <div class="case">
+    <div class="k">The closest proof · Sweatcoin × Adapty</div>
+    <h2>Another walk-to-earn app tripled install-to-subscription conversion in five months, with paywall tests alone.</h2>
+    <p class="lead">Sweatcoin pays people to walk, just like WeWard. Walking was always free, and in 2025 it added Premium, so <b>asking people who came to earn to start paying</b> was a new kind of conversation. In March 2026 it moved its paywalls to Adapty. Here is what April to August looked like.</p>
+    <div class="big">
+      <div><b>3.2x</b><span>install-to-subscription conversion</span></div>
+      <div><b>+150%</b><span>new subscriptions, with no increase in installs</span></div>
+      <div><b>+35%</b><span>revenue, April to August 2026</span></div>
+      <div><b>3.8x</b><span>conversion on iOS, 3.3x on Android</span></div>
+    </div>
+
+    <div class="quote"><i></i><div><p>“Sweatcoin’s users came to earn, so the first thing we had to sell them was the feeling of earning more, not the plan.”</p><small>Valeria Sletkova, Growth Product Lead at Flowa, Adapty’s in-house growth team</small></div></div>
+
+    <div class="finds">
+      <div class="find">
+        <div class="n"><b>+26.8%</b><span>iOS ARPU</span></div>
+        <h4>A free trial beat a discount</h4>
+        <p>The second-chance screen used to offer a cheaper annual plan. It became “3 days free, then $24.99/year” with “No payment now. Cancel anytime” under it, and earned more per user than the lower price did.</p>
+        <div class="ww"><b>For WeWard:</b> you already have a free week. Change 5 spells it out the same way: “No charge today. Free for 7 days, then 32,99 €/year.”</div>
+      </div>
+      <div class="find">
+        <div class="n"><b>+37% · +68%</b><span>iOS · Android, per 1,000 users</span></div>
+        <h4>A paywall built for the moment beat a universal one</h4>
+        <p>At the daily earning limit, a screen written for that moment beat the one-size paywall. At the Super Draw on Android, the dedicated screen earned 24% more.</p>
+        <div class="ww"><b>For WeWard:</b> changes 1 and 2 do the same at onboarding: the paywall speaks to why this walker came, not to everyone.</div>
+      </div>
+      <div class="find">
+        <div class="n"><b>+14.4% · +12.5%</b><span>iOS · Android, revenue per 1,000 users</span></div>
+        <h4>Regional prices earned more per user</h4>
+        <p>One global price reads as an impulse buy in one market and a real expense in another. Prices set per market with the Adapty Pricing Index won in a 19-day test.</p>
+        <div class="ww"><b>For WeWard:</b> you walk in 29 countries. This is the test we would run after the five on this page.</div>
+      </div>
+      <div class="find">
+        <div class="n"><b>19</b><span>A/B tests in five months</span></div>
+        <h4>No release queue</h4>
+        <p>Developers set up the SDK once. The first test went live about five weeks later, and every change after that shipped from the dashboard in Flow Builder, with no app update.</p>
+        <div class="ww"><b>For WeWard:</b> all five changes here are buildable in Flow Builder as they are.</div>
+      </div>
+    </div>
+    <div class="how"><span>Sweatcoin · 200M+ users</span><span>No. 1 in Health &amp; Fitness in 70+ countries</span><span>Tests run by Flowa, iOS and Android separately</span><span>Winners rolled out with no app update</span></div>
+    <p class="src">Sweatcoin’s own results, measured April–August 2026 in Adapty. They are not a forecast for WeWard.</p>
+  </div>
+</div>
+
+<div class="sec"><div class="wrap">
+  <div class="sec-k">What we change on your paywall</div>
+  <h2>Five changes, one screen, ranked by what we would test first.</h2>
+  <p class="body">Each one opens the paywall with that change highlighted.</p>
+  <div class="ideas">
+    <button class="idea" data-hl="1"><span class="no">1</span><span>
+      <h3>Put their name and their goal in the headline</h3>
+      <p>Today everyone reads “Earn Even More Rewards &amp; Unlock Exclusive Perks”. Someone who came to walk more now reads “Camille, walk more and earn 2x Wards on every step”, with their 4,500-step goal on the hero.</p>
+      <span class="tie">Sweatcoin: sell the feeling of earning more, not the plan</span><span class="seeit">See it on the paywall →</span></span>
+      <span class="out"><b>CR +15–20%</b><span>to purchase</span></span></button>
+    <button class="idea" data-hl="2"><span class="no">2</span><span>
+      <h3>Lead with the perk they came for</h3>
+      <p>No perk is named on the plans screen today. One line now opens with the one that matches their answer: faster cash-outs for “Earn rewards”, Wards to donate for “Support charities”.</p>
+      <span class="tie">Sweatcoin: a screen for the moment won by up to 68%</span><span class="seeit">See it on the paywall →</span></span>
+      <span class="out"><b>CR +3–8%</b><span>copy change</span></span></button>
+    <button class="idea" data-hl="3"><span class="no">3</span><span>
+      <h3>Show your 4.8 and your 30 million walkers</h3>
+      <p>Your 4.8 from 223K App Store ratings and your 30M walkers appear nowhere near the price. They now sit right above the plans.</p>
+      <span class="seeit">See it on the paywall →</span></span>
+      <span class="out"><b>CR +10–15%</b><span>to purchase</span></span></button>
+    <button class="idea" data-hl="4"><span class="no">4</span><span>
+      <h3>Say the yearly saving out loud</h3>
+      <p>The yearly card crosses out 53,88 € and stops there. It now says Save 39%, which is simply 32,99 € against twelve months at 4,49 €.</p>
+      <span class="seeit">See it on the paywall →</span></span>
+      <span class="out"><b>CR +5–15%</b><span>ARPU +10–15%</span></span></button>
+    <button class="idea" data-hl="5"><span class="no">5</span><span>
+      <h3>Spell out the free week under the button</h3>
+      <p>The trial lives only in the button label, and the line under it says “Billed at 32,99 €/year”, which reads as a charge. It now says “No charge today. Free for 7 days, then 32,99 €/year.”</p>
+      <span class="tie">Sweatcoin: the trial, spelled out, lifted iOS ARPU 26.8%</span><span class="seeit">See it on the paywall →</span></span>
+      <span class="out"><b>CR +3–8%</b><span>trust at the button</span></span></button>
+  </div>
+  <div class="band">
+    <div class="txt"><div class="lab">Potential outcome</div><p>Together, the five make the paywall talk to the walker the onboarding just met, and make the price and the free week impossible to misread.</p></div>
+    <div class="nums"><div><b>up to +20%</b><span>CR to purchase</span></div><div><b>up to +15%</b><span>ARPU</span></div></div>
+  </div>
+  <div class="cta-row"><button class="bigbtn" data-view="pw">Open the paywall <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+</div></div>
+<div class="foot"><div class="wrap">Impact ranges are Adapty’s expected effect from teardowns and A/B tests across subscription apps — not measured lift for WeWard. Sweatcoin figures are Sweatcoin’s own results in Adapty, April–August 2026. Every WeWard price, rating and perk here comes from WeWard’s own App Store listing, website and in-app screens.</div></div>
+</div><!-- /view-over -->
+
+<!-- ======================= PAYWALL ======================= -->
+<div class="view" id="view-pw">
 <div class="stage">
   <div class="phonecol">
     <div class="tools">
@@ -246,6 +484,7 @@ input{font:inherit}
     <div class="pn-foot">Impact ranges are Adapty’s expected effect from teardowns and A/B tests across subscription apps — not measured lift for WeWard. The prices, the free week, the 4.8 rating, the 30M figure and every perk come from WeWard’s own App Store listing, website and in-app screens.</div>
   </div></aside>
 </div>
+</div><!-- /view-pw -->
 
 <script>
 var MOT={
@@ -324,6 +563,18 @@ $$('.chg').forEach(function(c){
 if(/[?&]v=today/.test(location.search)){ S.v='today'; $$('#segVar button').forEach(function(x){ x.classList.toggle('on',x.dataset.v==='today'); }); }
 render();
 window.addEventListener('load',placeMarks);
+
+/* ---- views ---- */
+function showView(v){ $$('.view').forEach(function(x){ x.classList.remove('on'); }); $('#view-'+v).classList.add('on');
+  $$('.nav-links button').forEach(function(b){ b.classList.toggle('on',b.dataset.view===v); }); window.scrollTo(0,0); if(v==='pw') requestAnimationFrame(placeMarks); }
+$$('[data-view]').forEach(function(b){ b.addEventListener('click',function(){ showView(b.dataset.view); }); });
+$$('[data-scroll]').forEach(function(b){ b.addEventListener('click',function(){ document.getElementById(b.dataset.scroll).scrollIntoView({behavior:'smooth',block:'start'}); }); });
+$$('.idea[data-hl]').forEach(function(b){ b.addEventListener('click',function(){
+  var n=b.dataset.hl; showView('pw'); if(S.v!=='new') $('#segVar [data-v=new]').click();
+  setTimeout(function(){ $$('#pw [data-t="'+n+'"]').forEach(function(e){ e.classList.remove('flash'); void e.offsetWidth; e.classList.add('flash'); });
+    var c=document.querySelector('.chg[data-c="'+n+'"]'); if(c){ c.scrollIntoView({block:'nearest'}); c.style.background='#FFF3EA'; setTimeout(function(){ c.style.background=''; },3600); } },250); }); });
+if(/[?&]open=pw/.test(location.search)) showView('pw');
+
 </script>
 </body>
 </html>
