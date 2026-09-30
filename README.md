@@ -7,6 +7,10 @@ already asks: the name, the answer to "What brings you to WeWard?" and the 4,500
 the app sets. Change the answers under the phone and the paywall rewrites itself. Flip **Today**
 to see the version that ships now.
 
+## Why this works: Sweatcoin
+
+The page opens with an overview built around Sweatcoin, another walk-to-earn app. It moved its paywalls to Adapty in March 2026, and from April to August it reached **3.2x install-to-subscription conversion**, **+150% new subscriptions with no increase in installs** and **+35% revenue**. A free trial beat a discount (+26.8% iOS ARPU), paywalls built for the moment beat a universal one (+37% iOS, +68% Android at the daily limit), and regional prices earned 14.4% more per 1,000 iOS users.
+
 ## The five changes
 
 | # | Change | Today | Now | Expected impact |
